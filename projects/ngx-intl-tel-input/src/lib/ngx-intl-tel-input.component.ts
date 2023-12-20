@@ -12,7 +12,7 @@ import {
 	SimpleChanges,
 	ViewChild,
 } from '@angular/core';
-import { NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { setTheme } from 'ngx-bootstrap/utils';
 
@@ -21,7 +21,6 @@ import { CountryISO } from './enums/country-iso.enum';
 import { SearchCountryField } from './enums/search-country-field.enum';
 import { ChangeData } from './interfaces/change-data';
 import { Country } from './model/country.model';
-import { phoneNumberValidator } from './ngx-intl-tel-input.validator';
 import { PhoneNumberFormat } from './enums/phone-number-format.enum';
 
 @Component({
@@ -35,11 +34,6 @@ import { PhoneNumberFormat } from './enums/phone-number-format.enum';
 			provide: NG_VALUE_ACCESSOR,
 			// tslint:disable-next-line:no-forward-ref
 			useExisting: forwardRef(() => NgxIntlTelInputComponent),
-			multi: true,
-		},
-		{
-			provide: NG_VALIDATORS,
-			useValue: phoneNumberValidator,
 			multi: true,
 		},
 	],
@@ -59,7 +53,7 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges {
 	@Input() maxLength: number;
 	@Input() selectFirstCountry = true;
 	@Input() selectedCountryISO: CountryISO;
-	@Input() phoneValidation = true;
+	@Input() phoneValidation = false;
 	@Input() inputId = 'phone';
 	@Input() separateDialCode = false;
 	separateDialCodeClass: string;
